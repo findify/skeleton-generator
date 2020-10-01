@@ -33,5 +33,11 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "files": [
+    "dist/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ]
 }
