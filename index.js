@@ -109,7 +109,7 @@ const walkThroughNodes = (type, nodes, parentRect) =>
     .filter(i => !!i)
     .reduce((acc, item) => [...acc, ...item] ,[]);
 
-const getGroup = (groupNodes, config) => {
+const getGroup = (groupNodes, parentRect, config) => {
   const fistNode = groupNodes[0];
   const groupRect = fistNode.getBoundingClientRect();
   const textNodes = fistNode.querySelectorAll(config.text);
@@ -125,8 +125,11 @@ const getGroup = (groupNodes, config) => {
     .join(' ')
 
   const positions = groupNodes.map((node) => {
-    const { x, y } = node.getBoundingClientRect();
-    return { x, y };
+    const { left,top } = getPosition(node, parentRect);
+    return {
+      x: left,
+      y: top
+    };
   });
 
   return {
@@ -149,7 +152,7 @@ const getPaths = (type, selector, container, groups) => {
 }
 
 const getMainDrawing = (container, config) => {
-  const { width, height } = container.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
   const groupNodes = Array.from(container.querySelectorAll(config.group));
   const groupsHash = groupNodes
     .reduce((acc, node) => {
@@ -158,12 +161,13 @@ const getMainDrawing = (container, config) => {
       return { ...acc, [id]: [...acc[id], node ] };
     }, {});
   
-  const groups = Object.keys(groupsHash).map(id => getGroup(groupsHash[id], config));
+  const groups = Object.keys(groupsHash).map(id => getGroup(groupsHash[id], containerRect, config));
   const singles = [
     ...getPaths('text', config.text, container, groupNodes),
     ...getPaths('rect', config.rect, container, groupNodes)
   ]
 
+  const { width, height } = containerRect;
   return template({ width, height, singles, groups })
 }
 
