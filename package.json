@@ -1,6 +1,6 @@
 {
   "name": "@findify/skeleton-generator",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Generates content skeleton with animation",
   "source": "index.js",
   "main": "dist/skeleton-generator.js",
