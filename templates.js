@@ -1,5 +1,6 @@
 export const trim = string => props => string(props)
   .replace(/(\r\n|\n|\r)/gm, "")
+  .replace(/ +(?= )/g,'')
 
 export const animation = `
   <linearGradient id="fill">
@@ -68,8 +69,8 @@ export const template = trim(({
   singles,
   groups
 }) => `
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
-  <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style='fill: url("#fill");'></rect>
+<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+  <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style='fill: url("#fill");' />
   <defs>
     ${groups.map(path).join('')}
     <clipPath id="clip">
@@ -77,6 +78,6 @@ export const template = trim(({
       ${singles.map(rect).join('')}
     </clipPath>
     ${animation}
-  <defs>
+  </defs>
 </svg>
 `)
