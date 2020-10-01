@@ -27,7 +27,7 @@
     "url": "https://github.com/findify/skeleton-generator/issues"
   },
   "homepage": "https://github.com/findify/skeleton-generator#readme",
-  "dependencies": {
+  "devDependencies": {
     "element-to-path": "^1.2.0",
     "nanoid": "^3.1.12"
   },
