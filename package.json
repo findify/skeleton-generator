@@ -1,5 +1,5 @@
 {
-  "name": "skeleton-generator",
+  "name": "@findify/skeleton-generator",
   "version": "0.0.1",
   "description": "Generates content skeleton with animation",
   "source": "index.js",          
@@ -15,9 +15,9 @@
     "type": "git",
     "url": "git+https://github.com/findify/skeleton-generator.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["svg", "skeleton", "loader", "svg loader"],
+  "author": "findify.io",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/findify/skeleton-generator/issues"
   },
