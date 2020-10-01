@@ -1,0 +1,29 @@
+{
+  "name": "skeleton-generator",
+  "version": "0.0.1",
+  "description": "Generates content skeleton with animation",
+  "source": "index.js",          
+  "main": "dist/skeleton-generator.js",           
+  "module": "dist/skeleton-generator.module.js",
+  "unpkg": "dist/skeleton-generator.umd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "microbundle --name generatePlaceholder", 
+    "dev": "microbundle watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/findify/skeleton-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/findify/skeleton-generator/issues"
+  },
+  "homepage": "https://github.com/findify/skeleton-generator#readme",
+  "dependencies": {
+    "element-to-path": "^1.2.0",
+    "nanoid": "^3.1.12"
+  }
+}
