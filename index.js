@@ -1,6 +1,7 @@
 import toPath from 'element-to-path';
 import { template } from './templates';
-import { nanoid } from 'nanoid';
+
+const generateID = () => Math.random().toString(36).substring(7);
 
 const SELECTORS = {
   container: '[data-draw=\'container\']',
@@ -131,7 +132,7 @@ const getGroup = (groupNodes, config) => {
   return {
     positions,
     path,
-    id: nanoid()
+    id: generateID()
   }
 }
 

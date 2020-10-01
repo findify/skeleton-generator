@@ -8,8 +8,8 @@
   "unpkg": "dist/skeleton-generator.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "microbundle --name generatePlaceholder",
-    "dev": "microbundle watch"
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,14 @@
   },
   "homepage": "https://github.com/findify/skeleton-generator#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
     "element-to-path": "^1.2.0",
-    "nanoid": "^3.1.12"
+    "rollup": "^1.29.0",
+    "rollup-plugin-babel": "3",
+    "rollup-plugin-uglify": "^6.0.4"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -39,5 +45,10 @@
     "public/*",
     "*.json",
     "*.js"
-  ]
+  ],
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "crypto": "^1.0.1"
+  }
 }

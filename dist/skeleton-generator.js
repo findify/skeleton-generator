@@ -1,2 +1,269 @@
-function t(){return(t=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var n=arguments[e];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(t[r]=n[r])}return t}).apply(this,arguments)}"undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self&&self;var e,n=function(t,e,n){return function(t,e){t.exports=function(){const t=(t,e)=>/%$/.test(t)?100*t.replace("%","")/e:+t,e=t=>{const{points:e}=t;return((t,e=2)=>{let n=[];for(;t.length;)n.push(t.splice(0,e));return n})(e.trim().split(" ").reduce((t,e)=>[...t,...e.includes(",")?e.split(","):[e]],[]),2).map(([t,e],n)=>`${0===n?"M":"L"}${t} ${e}`)};return(n,{nodeName:r="name",nodeAttrs:o="attributes"}={})=>{const i=n[r],a=n[o];let u;return"rect"===i&&(u=(e=>{const n=+e.width,r=+e.height,o=e.x?+e.x:0,i=e.y?+e.y:0;let a=e.rx||"auto",u=e.ry||"auto";"auto"===a&&"auto"===u?a=u=0:"auto"!==a&&"auto"===u?a=u=t(a,n):"auto"!==u&&"auto"===a?u=a=t(u,r):(a=t(a,n),u=t(u,r)),a>n/2&&(a=n/2),u>r/2&&(u=r/2);const c=a>0&&u>0;return[`M${o+a} ${i}`,"H"+(o+n-a),...c?[`A${a} ${u} 0 0 1 ${o+n} ${i+u}`]:[],"V"+(i+r-u),...c?[`A${a} ${u} 0 0 1 ${o+n-a} ${i+r}`]:[],"H"+(o+a),...c?[`A${a} ${u} 0 0 1 ${o} ${i+r-u}`]:[],"V"+(i+u),...c?[`A${a} ${u} 0 0 1 ${o+a} ${i}`]:[],"z"]})(a)),"circle"!==i&&"ellipse"!==i||(u=(t=>{const e=+t.cx,n=+t.cy,r=t.rx?+t.rx:+t.r,o=t.ry?+t.ry:+t.r;return[`M${e+r} ${n}`,`A${r} ${o} 0 0 1 ${e} ${n+o}`,`A${r} ${o} 0 0 1 ${e-r} ${n}`,`A${r} ${o} 0 0 1 ${e+r} ${n}`,"z"]})(a)),"line"===i&&(u=(({x1:t,y1:e,x2:n,y2:r})=>[`M${+t} ${+e}`,`L${+n} ${+r}`])(a)),"polyline"===i&&(u=e(a)),"polygon"===i&&(u=[...e(a),"Z"]),"path"===i?a.d:(t=>Array.isArray(t)?t.join(" "):"")(u)}}()}(n={path:void 0,exports:{},require:function(t,e){return function(){throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs")}()}}),n.exports}(),r=function(t){return'\n  <rect rx="3" ry="3" x="'+t.x+'" y="'+t.y+'" width="'+t.width+'" height="'+t.height+'" />\n'},o=function(t){return'\n  <path id="'+t.id+'" d="'+t.path+'" />\n'},i=(e=function(e){var n=e.width,i=e.height,a=e.singles,u=e.groups;return'\n<svg width="'+n+'" height="'+i+'" viewBox="0 0 '+n+" "+i+'" preserveAspectRatio="none">\n  <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style=\'fill: url("#fill");\'></rect>\n  <defs>\n    '+u.map(o).join("")+'\n    <clipPath id="clip">\n      '+function(e){return e.reduce(function(e,n){return e+n.positions.map(function(e){return'\n  <use href="#'+(r=t({},n,e)).id+'" x="'+r.x+'" y="'+r.y+'" />\n';var r}).join("")},"")}(u)+"\n      "+a.map(r).join("")+'\n    </clipPath>\n    \n  <linearGradient id="fill">\n    <stop\n      offset="0.599964"\n      stop-color="#f3f3f3"\n      stop-opacity="1"\n    >\n      <animate\n        attributeName="offset"\n        values="-2; -2; 1"\n        keyTimes="0; 0.25; 1"\n        dur="2s"\n        repeatCount="indefinite"\n      ></animate>\n    </stop>\n    <stop\n      offset="1.59996"\n      stop-color="#ecebeb"\n      stop-opacity="1"\n    >\n      <animate\n        attributeName="offset"\n        values="-1; -1; 2"\n        keyTimes="0; 0.25; 1"\n        dur="2s"\n        repeatCount="indefinite"\n      ></animate>\n    </stop>\n    <stop\n      offset="2.59996"\n      stop-color="#f3f3f3"\n      stop-opacity="1"\n    >\n      <animate\n        attributeName="offset"\n        values="0; 0; 3"\n        keyTimes="0; 0.25; 1"\n        dur="2s"\n        repeatCount="indefinite"\n      ></animate>\n    </stop>\n  </linearGradient>\n\n  <defs>\n</svg>\n'},function(t){return e(t).replace(/(\r\n|\n|\r)/gm,"")});if("production"!==process.env.NODE_ENV){if("undefined"!=typeof navigator&&"ReactNative"===navigator.product&&"undefined"==typeof crypto)throw new Error("React Native does not have a built-in secure random generator. If you don’t need unpredictable IDs use `nanoid/non-secure`. For secure IDs, import `react-native-get-random-values` before Nano ID. If you use Expo, install `expo-random` and use `nanoid/async`.");if("undefined"!=typeof msCrypto&&"undefined"==typeof crypto)throw new Error("Import file with `if (!window.crypto) window.crypto = window.msCrypto` before importing Nano ID to fix IE 11 support");if("undefined"==typeof crypto)throw new Error("Your browser does not have secure random generator. If you don’t need unpredictable IDs, you can use nanoid/non-secure.")}let a=(t=21)=>{let e="",n=crypto.getRandomValues(new Uint8Array(t));for(;t--;){let r=63&n[t];e+=r<36?r.toString(36):r<62?(r-26).toString(36).toUpperCase():r<63?"_":"-"}return e};var u={container:"[data-draw='container']",group:"[data-draw='group']",text:"[data-draw='text']",rect:"[data-draw='rect']",border:"[data-draw='border']",identifyGroup:function(t){return t.dataset["draw-id"]}},c=function(t,e){var n=t.getBoundingClientRect();return{left:n.left-e.left,top:n.top-e.top,width:n.width,height:n.height}},p=function(t){return window.getComputedStyle(t,null)},l={text:function(t,e){if(!function(t){return!(t.offsetWidth||t.offsetHeight||t.getClientRects().length)}(t)){var n=c(t,e),r=function(t){var e=p(t),n=parseInt(e.getPropertyValue("font-size")),r=parseInt(e.getPropertyValue("line-height")),o=isNaN(r)?n:r,i=function(t){var e=t.getPropertyValue("box-sizing"),n=parseInt(t.getPropertyValue("height"));return"border-box"!==e?n:n-parseInt(t.getPropertyValue("padding-top"))-parseInt(t.getPropertyValue("padding-bottom"))-parseInt(t.getPropertyValue("border-top-width"))-parseInt(t.getPropertyValue("border-bottom-width"))}(e);return{lines:i<2*o?1:Math.ceil(i/o),lineHeight:o}}(t),o=r.lines,i=r.lineHeight;if(1===o){var a=function(t){var e=document.createRange();return e.selectNode(t),e.getClientRects()}(t);n.left=a[1].x-20,n.width=a[1].width}var u=n.left,l=n.top,d=n.width,s=n.height;return[].concat(Array(o).keys()).map(function(t){return{x:u,y:t?l+t*i+5*t:l,height:s<i?s:i,width:d}})}},rect:function(t,e){var n=c(t,e),r=p(t),o=parseInt(r.getPropertyValue("padding-left")),i=parseInt(r.getPropertyValue("padding-right"));return[{x:n.left+o,y:n.top,width:n.width+i,height:n.height}]}},d=function(t,e,n){return Array.from(e).map(function(e){return l[t](e,n)}).filter(function(t){return!!t}).reduce(function(t,e){return[].concat(t,e)},[])},s=function(t,e,n,r){var o=n.getBoundingClientRect(),i=Array.from(n.querySelectorAll(e)).filter(function(t){return!r.find(function(n){return Array.from(n.querySelectorAll(e)).includes(t)})});return d(t,i,o)};module.exports=function(e){var r=t({},u,e);if(!document)return console.error("Function available only in browser environment!");var o=document.querySelectorAll(r.container);return o?Array.from(o).map(function(e){return function(e,r){var o=e.getBoundingClientRect(),u=o.width,c=o.height,p=Array.from(e.querySelectorAll(r.group)),l=p.reduce(function(e,n){var o,i,a=r.identifyGroup(n);return t({},e,e[a]?((i={})[a]=[].concat(e[a],[n]),i):((o={})[a]=[n],o))},{}),f=Object.keys(l).map(function(t){return function(t,e){var r=t[0],o=r.getBoundingClientRect(),i=r.querySelectorAll(e.text),u=r.querySelectorAll(e.rect),c=[].concat(d("text",i,o),d("rect",u,o)).map(function(t){return n({type:"element",name:"rect",attributes:t})}).join(" ");return{positions:t.map(function(t){var e=t.getBoundingClientRect();return{x:e.x,y:e.y}}),path:c,id:a()}}(l[t],r)}),y=[].concat(s("text",r.text,e,p),s("rect",r.rect,e,p));return i({width:u,height:c,singles:y,groups:f})}(e,r)}):console.error("FNo containers was found on the page")};
-//# sourceMappingURL=skeleton-generator.js.map
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var toPath = _interopDefault(require('element-to-path'));
+
+const trim = string => props => string(props)
+  .replace(/(\r\n|\n|\r)/gm, "");
+
+const animation = `
+  <linearGradient id="fill">
+    <stop
+      offset="0.599964"
+      stop-color="#f3f3f3"
+      stop-opacity="1"
+    >
+      <animate
+        attributeName="offset"
+        values="-2; -2; 1"
+        keyTimes="0; 0.25; 1"
+        dur="2s"
+        repeatCount="indefinite"
+      ></animate>
+    </stop>
+    <stop
+      offset="1.59996"
+      stop-color="#ecebeb"
+      stop-opacity="1"
+    >
+      <animate
+        attributeName="offset"
+        values="-1; -1; 2"
+        keyTimes="0; 0.25; 1"
+        dur="2s"
+        repeatCount="indefinite"
+      ></animate>
+    </stop>
+    <stop
+      offset="2.59996"
+      stop-color="#f3f3f3"
+      stop-opacity="1"
+    >
+      <animate
+        attributeName="offset"
+        values="0; 0; 3"
+        keyTimes="0; 0.25; 1"
+        dur="2s"
+        repeatCount="indefinite"
+      ></animate>
+    </stop>
+  </linearGradient>
+`;
+
+const rect = ({ x, y, width, height }) => `
+  <rect rx="3" ry="3" x="${x}" y="${y}" width="${width}" height="${height}" />
+`;
+const use = ({ id, x, y }) => `
+  <use href="#${id}" x="${x}" y="${y}" />
+`;
+const path = ({ path, id }) => `
+  <path id="${id}" d="${path}" />
+`;
+
+const renderRefs = (groups) =>
+  groups.reduce(
+    (acc, group) => acc + group.positions.map(
+      (position) => use({ ...group, ...position })
+    ).join('')
+  , '');
+
+const template = trim(({
+  width,
+  height,
+  singles,
+  groups
+}) => `
+<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+  <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style='fill: url("#fill");'></rect>
+  <defs>
+    ${groups.map(path).join('')}
+    <clipPath id="clip">
+      ${renderRefs(groups)}
+      ${singles.map(rect).join('')}
+    </clipPath>
+    ${animation}
+  <defs>
+</svg>
+`);
+
+const generateID = () => Math.random().toString(36).substring(7);
+
+const SELECTORS = {
+  container: '[data-draw=\'container\']',
+  group: '[data-draw=\'group\']',
+  text: '[data-draw=\'text\']',
+  rect: '[data-draw=\'rect\']',
+  border: '[data-draw=\'border\']',
+};
+
+const defaultGroupIdentifier = (node) => node.dataset['draw-id'];
+
+const defaultConfig = {
+  container: SELECTORS.container,
+  group: SELECTORS.group,
+  text: SELECTORS.text,
+  rect: SELECTORS.rect,
+  border: SELECTORS.border,
+  identifyGroup: defaultGroupIdentifier
+};
+
+const isHidden = node => !(node.offsetWidth || node.offsetHeight || node.getClientRects().length);
+
+const getPosition = (node, containerRect) => {
+  const nodeRect = node.getBoundingClientRect();
+  return {
+    left: nodeRect.left - containerRect.left,
+    top: nodeRect.top - containerRect.top,
+    width: nodeRect.width,
+    height: nodeRect.height,
+  }
+};
+
+const getElementHeight = (style) => {
+  const boxSizing = style.getPropertyValue("box-sizing");
+  const height = parseInt(style.getPropertyValue("height"));
+  if (boxSizing !== 'border-box') return height;
+  const paddingTop = parseInt(style.getPropertyValue("padding-top"));
+  const paddingBottom = parseInt(style.getPropertyValue("padding-bottom"));
+  const borderTop = parseInt(style.getPropertyValue("border-top-width"));
+  const borderBottom = parseInt(style.getPropertyValue("border-bottom-width"));
+  return height - paddingTop - paddingBottom - borderTop - borderBottom;
+};
+
+const getNodeStyles = (node) => window.getComputedStyle(node, null);
+
+const countLines = (node) => {
+  const style = getNodeStyles(node);
+  const _fontSize = parseInt(style.getPropertyValue("font-size"));
+  const _lineHeight = parseInt(style.getPropertyValue("line-height"));
+  const lineHeight = isNaN(_lineHeight) ? _fontSize : _lineHeight;
+  const height = getElementHeight(style);
+  return {
+    lines: (height < lineHeight * 2) ? 1 : Math.ceil(height / lineHeight),
+    lineHeight: lineHeight
+  };
+};
+
+const getRange = (node) => {
+  const range = document.createRange();
+  range.selectNode(node);
+  return range.getClientRects();
+};
+
+const elements = {
+  text(node, containerRect) {
+    if (isHidden(node)) return;
+    const position = getPosition(node, containerRect);
+    const { lines, lineHeight } = countLines(node);
+
+    if (lines === 1) {
+      const rangeOffset = getRange(node);
+      position.left = rangeOffset[1].x - 20;
+      position.width = rangeOffset[1].width;
+    }
+
+    const { left, top, width, height } = position;
+
+    return [...Array(lines).keys()].map((index) => ({
+      x: left,
+      y: !index ? top : top + (index * lineHeight) + (index * 5),
+      height: height < lineHeight ? height : lineHeight,
+      width,
+    }))
+  },
+
+  rect(node, containerRect) {
+    const position = getPosition(node, containerRect);
+    const style = getNodeStyles(node);
+    const paddingLeft = parseInt(style.getPropertyValue("padding-left"));
+    const paddingRight = parseInt(style.getPropertyValue("padding-right"));
+    const { left, top, width, height } = position;
+
+    return [{
+      x: left + paddingLeft,
+      y: top,
+      width: width + paddingRight,
+      height
+    }]
+  },
+};
+
+const walkThroughNodes = (type, nodes, parentRect) =>
+  Array.from(nodes)
+    .map((node) => elements[type](node, parentRect))
+    .filter(i => !!i)
+    .reduce((acc, item) => [...acc, ...item] ,[]);
+
+const getGroup = (groupNodes, config) => {
+  const fistNode = groupNodes[0];
+  const groupRect = fistNode.getBoundingClientRect();
+  const textNodes = fistNode.querySelectorAll(config.text);
+  const rectNodes = fistNode.querySelectorAll(config.rect);
+
+  const groupElements = [
+    ...walkThroughNodes('text', textNodes, groupRect),
+    ...walkThroughNodes('rect', rectNodes, groupRect)
+  ];
+
+  const path = groupElements
+    .map((attributes) => toPath({ type: 'element', name: 'rect', attributes }))
+    .join(' ');
+
+  const positions = groupNodes.map((node) => {
+    const { x, y } = node.getBoundingClientRect();
+    return { x, y };
+  });
+
+  return {
+    positions,
+    path,
+    id: generateID()
+  }
+};
+
+const getPaths = (type, selector, container, groups) => {
+  const parentRect = container.getBoundingClientRect();
+  const nodes = Array
+    .from(container.querySelectorAll(selector))
+    .filter((node) =>
+      !groups.find(group => Array.from(group.querySelectorAll(selector)).includes(node))
+    );
+  
+  return walkThroughNodes(type, nodes, parentRect);
+};
+
+const getMainDrawing = (container, config) => {
+  const { width, height } = container.getBoundingClientRect();
+  const groupNodes = Array.from(container.querySelectorAll(config.group));
+  const groupsHash = groupNodes
+    .reduce((acc, node) => {
+      const id = config.identifyGroup(node);
+      if (!acc[id]) return { ...acc, [id]: [node] };
+      return { ...acc, [id]: [...acc[id], node ] };
+    }, {});
+  
+  const groups = Object.keys(groupsHash).map(id => getGroup(groupsHash[id], config));
+  const singles = [
+    ...getPaths('text', config.text, container, groupNodes),
+    ...getPaths('rect', config.rect, container, groupNodes)
+  ];
+
+  return template({ width, height, singles, groups })
+};
+
+var index = (_config) => {
+  const config = { ...defaultConfig, ..._config };
+  if (!document) return console.error('Function available only in browser environment!');
+
+  const container = document.querySelectorAll(config.container);
+  if (!container) return console.error('FNo containers was found on the page');
+
+  const res = Array
+    .from(container)
+    .map(c => getMainDrawing(c, config));
+
+  return res;
+};
+
+module.exports = index;
