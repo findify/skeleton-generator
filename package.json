@@ -1,6 +1,6 @@
 {
   "name": "@findify/skeleton-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generates content skeleton with animation",
   "source": "index.js",
   "main": "dist/skeleton-generator.js",
@@ -32,6 +32,6 @@
     "nanoid": "^3.1.12"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   }
 }
