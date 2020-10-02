@@ -1,8 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import pkg from './package.json';
-import { uglify } from "rollup-plugin-uglify";
 import babel from 'rollup-plugin-babel';
+import pkg from './package.json';
 
 export default [
 	{
@@ -18,11 +17,11 @@ export default [
         babelrc: false,
         presets: [
           ['env', { modules: false }],
+          ['minify'],
         ],
         plugins: ['babel-plugin-transform-object-rest-spread']
       }),
       commonjs(),
-      uglify()
 		]
 	},
 	{

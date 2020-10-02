@@ -53,16 +53,21 @@ const countLines = (node) => {
   const _lineHeight = parseInt(style.getPropertyValue("line-height"));
   const lineHeight = isNaN(_lineHeight) ? _fontSize : _lineHeight
   const height = getElementHeight(style);
+  const lines = (height < lineHeight * 2) ? 1 : Math.ceil(height / lineHeight);
   return {
-    lines: (height < lineHeight * 2) ? 1 : Math.ceil(height / lineHeight),
+    lines: !lines ? 1 : lines,
     lineHeight: lineHeight
   };
 }
 
-const getRange = (node) => {
+const getRange = (node, containerRect) => {
   const range = document.createRange();
-  range.selectNode(node);
-  return range.getClientRects();
+  range.selectNodeContents(node);
+  const rect = range.getBoundingClientRect();
+  return {
+    left: rect.left - containerRect.left,
+    width: rect.width
+  };
 }
 
 const elements = {
@@ -72,9 +77,9 @@ const elements = {
     const { lines, lineHeight } = countLines(node);
 
     if (lines === 1) {
-      const rangeOffset = getRange(node);
-      position.left = rangeOffset[1].x - 20;
-      position.width = rangeOffset[1].width;
+      const range = getRange(node, containerRect);
+      position.left = range.left;
+      position.width = range.width;
     }
 
     const { left, top, width, height } = position;
@@ -89,15 +94,12 @@ const elements = {
 
   rect(node, containerRect) {
     const position = getPosition(node, containerRect);
-    const style = getNodeStyles(node);
-    const paddingLeft = parseInt(style.getPropertyValue("padding-left"));
-    const paddingRight = parseInt(style.getPropertyValue("padding-right"));
     const { left, top, width, height } = position;
 
     return [{
-      x: left + paddingLeft,
+      x: left,
       y: top,
-      width: width + paddingRight,
+      width: width,
       height
     }]
   },
@@ -111,13 +113,13 @@ const walkThroughNodes = (type, nodes, parentRect) =>
 
 const getGroup = (groupNodes, parentRect, config) => {
   const fistNode = groupNodes[0];
-  const groupRect = fistNode.getBoundingClientRect();
+  const groupRect = getPosition(fistNode, parentRect);
   const textNodes = fistNode.querySelectorAll(config.text);
   const rectNodes = fistNode.querySelectorAll(config.rect);
 
   const groupElements = [
-    ...walkThroughNodes('text', textNodes, groupRect),
-    ...walkThroughNodes('rect', rectNodes, groupRect)
+    ...walkThroughNodes('text', textNodes, parentRect),
+    ...walkThroughNodes('rect', rectNodes, parentRect)
   ]
 
   const path = groupElements
@@ -125,10 +127,14 @@ const getGroup = (groupNodes, parentRect, config) => {
     .join(' ')
 
   const positions = groupNodes.map((node) => {
+    // Set same size for groups
+    node.style.height = groupNodes[0].offsetHeight + 'px';
+    node.style.width = groupNodes[0].width + 'px';
+
     const { left,top } = getPosition(node, parentRect);
     return {
-      x: left,
-      y: top
+      x: left - groupRect.left,
+      y: top - groupRect.top
     };
   });
 
@@ -141,7 +147,6 @@ const getGroup = (groupNodes, parentRect, config) => {
 
 const getPaths = (type, selector, container, groups) => {
   const parentRect = container.getBoundingClientRect();
-  const groupsArray = Array.from(groups);
   const nodes = Array
     .from(container.querySelectorAll(selector))
     .filter((node) =>
@@ -176,7 +181,7 @@ export default (_config) => {
   if (!document) return console.error('Function available only in browser environment!');
 
   const container = document.querySelectorAll(config.container);
-  if (!container) return console.error('FNo containers was found on the page');
+  if (!container) return console.error('No containers was found on the page');
 
   const res = Array
     .from(container)
