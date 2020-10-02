@@ -46,22 +46,29 @@ export const animation = `
   </linearGradient>
 `
 
-const rect = ({ x, y, width, height }) => `
-  <rect rx="3" ry="3" x="${x}" y="${y}" width="${width}" height="${height}" />
-`
-const use = ({ id, x, y }) => `
-  <use href="#${id}" x="${x}" y="${y}" />
-`
-const path = ({ path, id }) => `
-  <path id="${id}" d="${path}" />
-`
+const render = {
+  rect({ x, y, width, height }) {
+    return ` <rect rx="3" ry="3" x="${x}" y="${y}" width="${width}" height="${height}" />`
+  },
+  use({ id, x, y }) {
+    return `<use href="#${id}" x="${x}" y="${y}" />`
+  },
+  path({ path, id }) {
+    return `<path id="${id}" d="${path}" />`
+  },
+  circle({ r, cx, cy }) {
+    return `<circle r="${r}" cx="${cx}" cy="${cy}" />`
+  }
+}
 
 const renderRefs = (groups) =>
   groups.reduce(
     (acc, group) => acc + group.positions.map(
-      (position) => use({ ...group, ...position })
+      (position) => render.use({ ...group, ...position })
     ).join('')
   , '')
+
+const renderSingleElement = ({ type, ...props }) => render[type](props);
 
 export const template = trim(({
   width,
@@ -72,10 +79,10 @@ export const template = trim(({
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
   <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style='fill: url("#fill");' />
   <defs>
-    ${groups.map(path).join('')}
+    ${groups.map(render.path).join('')}
     <clipPath id="clip">
       ${renderRefs(groups)}
-      ${singles.map(rect).join('')}
+      ${singles.map(renderSingleElement).join('')}
     </clipPath>
     ${animation}
   </defs>

@@ -8,6 +8,7 @@ const SELECTORS = {
   group: '[data-draw=\'group\']',
   text: '[data-draw=\'text\']',
   rect: '[data-draw=\'rect\']',
+  circle: '[data-draw=\'circle\']',
   border: '[data-draw=\'border\']',
 }
 
@@ -18,6 +19,7 @@ const defaultConfig = {
   group: SELECTORS.group,
   text: SELECTORS.text,
   rect: SELECTORS.rect,
+  circle: SELECTORS.circle,
   border: SELECTORS.border,
   identifyGroup: defaultGroupIdentifier
 }
@@ -69,6 +71,12 @@ const getRange = (node, containerRect) => {
     width: rect.width
   };
 }
+const boxMatrix = [
+  [0, 0, 1, 0],
+  [0, 0, 0, 1],
+  [1, 0, 0, 1],
+  [0, 1, 1, 0]
+];
 
 const elements = {
   text(node, containerRect) {
@@ -85,6 +93,7 @@ const elements = {
     const { left, top, width, height } = position;
 
     return [...Array(lines).keys()].map((index) => ({
+      type: 'rect',
       x: left,
       y: !index ? top : top + (index * lineHeight) + (index * 5),
       height: height < lineHeight ? height : lineHeight,
@@ -97,10 +106,37 @@ const elements = {
     const { left, top, width, height } = position;
 
     return [{
+      type: 'rect',
       x: left,
       y: top,
       width: width,
-      height
+      height,
+    }]
+  },
+
+
+  border(node, containerRect) {
+    const position = getPosition(node, containerRect);
+    const { left, top, width, height } = position;
+    const borderSize = 5;
+    return [...Array(4).keys()].map((i) => ({
+      type: 'rect',
+      x: !boxMatrix[i][0] ? left : width + left - borderSize,
+      y: !boxMatrix[i][1] ? top : height + top - borderSize,
+      height: !boxMatrix[i][2] ? height : borderSize,
+      width: !boxMatrix[i][3] ? width : borderSize,
+    }))
+  },
+
+  circle(node, containerRect) {
+    const position = getPosition(node, containerRect);
+    const { left, top, width, height } = position;
+
+    return [{
+      type: 'circle',
+      cx: left + width / 2,
+      cy: top + height / 2,
+      r: width / 2
     }]
   },
 }
@@ -116,14 +152,20 @@ const getGroup = (groupNodes, parentRect, config) => {
   const groupRect = getPosition(fistNode, parentRect);
   const textNodes = fistNode.querySelectorAll(config.text);
   const rectNodes = fistNode.querySelectorAll(config.rect);
+  const circleNodes = fistNode.querySelectorAll(config.circle);
+  const borderNodes = fistNode.querySelectorAll(config.border);
 
   const groupElements = [
     ...walkThroughNodes('text', textNodes, parentRect),
-    ...walkThroughNodes('rect', rectNodes, parentRect)
+    ...walkThroughNodes('rect', rectNodes, parentRect),
+    ...walkThroughNodes('circle', circleNodes, parentRect),
+    ...walkThroughNodes('border', borderNodes, parentRect)
   ]
 
   const path = groupElements
-    .map((attributes) => toPath({ type: 'element', name: 'rect', attributes }))
+    .map(({ type, ...attributes }) =>
+      toPath({ type: 'element', name: type, attributes })
+    )
     .join(' ')
 
   const positions = groupNodes.map((node) => {
@@ -169,7 +211,9 @@ const getMainDrawing = (container, config) => {
   const groups = Object.keys(groupsHash).map(id => getGroup(groupsHash[id], containerRect, config));
   const singles = [
     ...getPaths('text', config.text, container, groupNodes),
-    ...getPaths('rect', config.rect, container, groupNodes)
+    ...getPaths('rect', config.rect, container, groupNodes),
+    ...getPaths('circle', config.circle, container, groupNodes),
+    ...getPaths('border', config.border, container, groupNodes)
   ]
 
   const { width, height } = containerRect;
