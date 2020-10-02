@@ -42,13 +42,13 @@ Also, this script allows you to reduce size of svg by using `group` for repeatin
 ## Properties
 | Prop Name | Default | Description |
 |-----------|---------|-------------|
-| `container` | `[data-draw=\'container\']` | Container selector, viewbox for svg. All sizes and elements position will be calculated relative to this container. The generator returns array of SVG strings for each container on the page |
+| `container` | `[data-draw=\'container\']` | Container selector - viewbox for svg. All sizes and elements position will be calculated relative to this container. The generator returns array of SVG strings for each container on the page |
 | `group` | `[data-draw=\'group\']` | Repeating items could be combined in group to reduce size of SVG. The sample of group is its first representative |
 | `text` | `[data-draw=\'text\']` | Text nodes selector calculates number of lines and its width |
 | `rect` | `[data-draw=\'rect\']` | Simple rect node - could be any element, generator will calculate its width and height |
 | `border` | `[data-draw=\'border\']` | Draws 4 rectangles around element with 5px width |
 | `circe` | `[data-draw=\'circle\']` | Just simple circle, might be useful for avatars |
-| `identifyGroup` | `n => node.dataset['draw-id']` | Function to identify what group the element is belong to. Provides DOMNode and await for unique for group string ID | 
+| `identifyGroup` | `n => node.dataset['draw-id']` | Function to identify what group the element is belong to. Provides DOMNode and waits for unique string ID | 
 
 
 ## Development 
