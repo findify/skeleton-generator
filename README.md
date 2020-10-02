@@ -12,10 +12,10 @@ Automatically generates beautiful SVG content loader with animations
   script.onload = function() {
     console.log( // Array of SVG's
       generatePlaceholder({
-          container: '.container--default-page',
-          text: '.findify-components--text',
-          rect: '.findify-components--cards--product__image, .findify-components--button',
-          group: '.findify-components-search--desktop-facets__facet, .findify-components--cards--product',
+          container: '.container--page',
+          text: '.components--text',
+          rect: '.components--cards--product__image, .components--button',
+          group: '.components-facets__facet, .components--cards--product',
           identifyGroup: (node) => node.className
       })
     )
