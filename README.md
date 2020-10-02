@@ -1,6 +1,6 @@
 # skeleton-generator
 Automatically generates beautiful SVG content loader with animations
-![Content loader]('https://raw.githubusercontent.com/findify/skeleton-generator/master/skeleton-generator.jpg')
+<img src="https://raw.githubusercontent.com/findify/skeleton-generator/master/skeleton-generator.jpg" alt="Content loader" align="center" />
 
 ## Browser
 
