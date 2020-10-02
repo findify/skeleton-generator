@@ -12,14 +12,18 @@ Automatically generates beautiful SVG content loader with animations
   script.onload = function() {
     console.log( // Array of SVG's
       generatePlaceholder({
-        // props
+          container: '.container--default-page',
+          text: '.findify-components--text',
+          rect: '.findify-components--cards--product__image, .findify-components--button',
+          group: '.findify-components-search--desktop-facets__facet, .findify-components--cards--product',
+          identifyGroup: (node) => node.className
       })
     )
   };
 })()
 ```
 
-## Node/Yarn
+## Npm/Yarn
 
 ```bash
 yarn add @findify/skeleton-generator
