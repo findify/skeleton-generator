@@ -37,9 +37,6 @@
     "rollup-plugin-babel": "3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "files": [
     "dist/*",
     "public/*",
