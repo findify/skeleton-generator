@@ -11,10 +11,6 @@
     "build": "rollup -c",
     "dev": "rollup -c -w"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/findify/skeleton-generator.git"
-  },
   "keywords": [
     "svg",
     "skeleton",
