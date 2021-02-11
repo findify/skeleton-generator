@@ -8,8 +8,8 @@ const trim = string => props => string(props)
   .replace(/(\r\n|\n|\r)/gm, "")
   .replace(/ +(?= )/g,'');
 
-const animation = `
-  <linearGradient id="fill">
+const animation = (fill) => `
+  <linearGradient id="${fills}">
     <stop
       offset="0.599964"
       stop-color="#f3f3f3"
@@ -75,25 +75,33 @@ const renderRefs = (groups) =>
   , '');
 
 const renderSingleElement = ({ type, ...props }) => render[type](props);
+const randomKey = () => Math.random().toString(36).substring(7);
+const generateIds = () => [
+  `clip-${randomKey()}`,
+  `fill-${randomKey()}`
+];
 
 const template = trim(({
   width,
   height,
   singles,
   groups
-}) => `
-<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
-  <rect x="0" y="0" width="100%" height="100%" clip-path="url(#clip)" style='fill: url("#fill");' />
-  <defs>
-    ${groups.map(render.path).join('')}
-    <clipPath id="clip">
-      ${renderRefs(groups)}
-      ${singles.map(renderSingleElement).join('')}
-    </clipPath>
-    ${animation}
-  </defs>
-</svg>
-`);
+}) => {
+  const [clip, fill] = generateIds();
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+      <rect x="0" y="0" width="100%" height="100%" clip-path="url(#${clip})" style='fill: url("#${fill}");' />
+      <defs>
+        ${groups.map(render.path).join('')}
+        <clipPath id="${clip}">
+          ${renderRefs(groups)}
+          ${singles.map(renderSingleElement).join('')}
+        </clipPath>
+        ${animation()}
+      </defs>
+    </svg>
+  `
+});
 
 const generateID = () => Math.random().toString(36).substring(7);
 
