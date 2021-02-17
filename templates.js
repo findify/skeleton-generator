@@ -3,7 +3,7 @@ export const trim = string => props => string(props)
   .replace(/ +(?= )/g,'')
 
 export const animation = (fill) => `
-  <linearGradient id="${fills}">
+  <linearGradient id="${fill}">
     <stop
       offset="0.599964"
       stop-color="#f3f3f3"
