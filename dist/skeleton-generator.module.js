@@ -5,7 +5,7 @@ const trim = string => props => string(props)
   .replace(/ +(?= )/g,'');
 
 const animation = (fill) => `
-  <linearGradient id="${fills}">
+  <linearGradient id="${fill}">
     <stop
       offset="0.599964"
       stop-color="#f3f3f3"
@@ -93,7 +93,7 @@ const template = trim(({
           ${renderRefs(groups)}
           ${singles.map(renderSingleElement).join('')}
         </clipPath>
-        ${animation()}
+        ${animation(fill)}
       </defs>
     </svg>
   `
